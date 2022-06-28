@@ -12,7 +12,7 @@ export const Leftbar = () => {
                 <Box sx={{ overflow: 'auto' }}>
                     <Divider />
                         <List>
-                            <ListItem key= 'Soccer' disablePadding>
+                            <ListItem key= 'Soccer' >
                                 <ListItemButton>
                                     <ListItemIcon>
                                         <SportsSoccerIcon sx={{color: '#fff'}}/>
@@ -20,7 +20,7 @@ export const Leftbar = () => {
                                     <ListItemText primary='Soccer' />
                                 </ListItemButton>                               
                             </ListItem>
-                            <ListItem disablePadding>
+                            <ListItem >
                                 <ListItemButton>
                                     <ListItemIcon>
                                         <SportsBaseballIcon sx={{color: '#fff'}}/>
@@ -28,7 +28,7 @@ export const Leftbar = () => {
                                     <ListItemText primary='Baseball'/>
                                 </ListItemButton>
                             </ListItem>
-                            <ListItem disablePadding>
+                            <ListItem >
                                 <ListItemButton>
                                     <ListItemIcon>
                                         <SportsScoreIcon sx={{color: '#fff'}}/>
@@ -36,7 +36,7 @@ export const Leftbar = () => {
                                     <ListItemText primary='F1 Racing' />
                                 </ListItemButton>
                             </ListItem>
-                            <ListItem disablePadding>
+                            <ListItem >
                                 <ListItemButton>
                                     <ListItemIcon>
                                         <SportsVolleyballIcon sx={{color: '#fff'}}/>
