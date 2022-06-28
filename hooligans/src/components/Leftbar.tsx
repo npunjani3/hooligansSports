@@ -41,7 +41,7 @@ export const Leftbar = () => {
                                     <ListItemIcon>
                                         <SportsVolleyballIcon sx={{color: '#fff'}}/>
                                     </ListItemIcon>
-                                    <ListItemText primary='Volley Ball' />
+                                    <ListItemText primary='Volleyball' />
                                 </ListItemButton>
                             </ListItem>
                         </List>
