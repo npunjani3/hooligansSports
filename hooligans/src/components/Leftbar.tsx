@@ -1,17 +1,31 @@
 import { useState } from 'react';
-import {Box, Collapse, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
+import {Box, Collapse, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from '@mui/material';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import SportsBaseballIcon from '@mui/icons-material/SportsBaseball';
 import SportsScoreIcon from '@mui/icons-material/SportsScore';
 import SportsVolleyballIcon from '@mui/icons-material/SportsVolleyball';
-
+import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
 
 export const Leftbar = () => {
-    const [open, setOpen] = useState(false);
+    const [openSoccer, setSoccerOpen] = useState(false);
+    
 
-    const handleClick = () => {
-        setOpen(!open);
-      };
+    const handleSoccerClick = () => {
+        setSoccerOpen(prevState => ! prevState);
+    }
+
+    const [openBaseball, setBaseballOpen] = useState(false);
+
+    const handleBaseballClick = () => {
+        setBaseballOpen(prevState => ! prevState);
+    }
+
+    const [openBasketball, setBasketballOpen] = useState(false);
+
+    const handleBasketballClick = () => {
+        setBasketballOpen(prevState => ! prevState);
+    }
+    
 
     return (
             <Drawer sx={{width: '240px', backgroundColor: '#1976d2', flexShrink: 0,
@@ -20,14 +34,14 @@ export const Leftbar = () => {
                     <Divider />
                         <List component="nav">
                             <ListItem >
-                                <ListItemButton onClick={handleClick}>
+                                <ListItemButton onClick={()=>handleSoccerClick()}>
                                     <ListItemIcon>
                                         <SportsSoccerIcon sx={{color: '#fff'}}/>
                                     </ListItemIcon>
                                     <ListItemText primary='Soccer' />
                                 </ListItemButton>                  
                             </ListItem>
-                            <Collapse in={open} timeout="auto" unmountOnExit>
+                            <Collapse in={openSoccer} timeout="auto" unmountOnExit>
                                 <List component = "div" disablePadding>
                                     <ListItemButton sx={{ pl: 4 }}>
                                         <ListItem >
@@ -37,14 +51,14 @@ export const Leftbar = () => {
                                 </List>
                             </Collapse>    
                             <ListItem >
-                                <ListItemButton onClick={handleClick}>
+                                <ListItemButton onClick={()=>handleBaseballClick()}>
                                     <ListItemIcon>
                                         <SportsBaseballIcon sx={{color: '#fff'}}/>
                                     </ListItemIcon>
                                     <ListItemText primary='Baseball'/>
                                 </ListItemButton>
                             </ListItem>
-                            <Collapse in={open} timeout="auto" unmountOnExit>
+                            <Collapse in={openBaseball} timeout="auto" unmountOnExit>
                                 <List component = "div" disablePadding>
                                     <ListItemButton sx={{ pl: 4 }}>
                                         <ListItem >
@@ -52,7 +66,24 @@ export const Leftbar = () => {
                                         </ListItem>
                                     </ListItemButton>
                                 </List>
-                            </Collapse>    
+                            </Collapse>
+                            <ListItem >
+                                <ListItemButton onClick={()=>handleBasketballClick()}>
+                                    <ListItemIcon>
+                                        <SportsBasketballIcon sx={{color: '#fff'}}/>
+                                    </ListItemIcon>
+                                    <ListItemText primary='Basketball'/>
+                                </ListItemButton>
+                            </ListItem>
+                            <Collapse in={openBasketball} timeout="auto" unmountOnExit>
+                                <List component = "div" disablePadding>
+                                    <ListItemButton sx={{ pl: 4 }}>
+                                        <ListItem >
+                                            <ListItemText primary="NBA" />
+                                        </ListItem>
+                                    </ListItemButton>
+                                </List>
+                            </Collapse>   
                             <ListItem >
                                 <ListItemButton id='f1-btn'>
                                     <ListItemIcon>
