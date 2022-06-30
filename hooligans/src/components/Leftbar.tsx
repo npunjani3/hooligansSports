@@ -25,6 +25,12 @@ export const Leftbar = () => {
     const handleBasketballClick = () => {
         setBasketballOpen(prevState => ! prevState);
     }
+
+    const [openF1, setF1Open] = useState(false);
+
+    const handleF1Click = () => {
+        setF1Open(prevState => ! prevState);
+    }
     
 
     return (
@@ -85,13 +91,22 @@ export const Leftbar = () => {
                                 </List>
                             </Collapse>   
                             <ListItem >
-                                <ListItemButton id='f1-btn'>
+                                <ListItemButton onClick={()=>handleF1Click()}>
                                     <ListItemIcon>
                                         <SportsScoreIcon sx={{color: '#fff'}}/>
                                     </ListItemIcon>
                                     <ListItemText primary='F1 Racing' />
                                 </ListItemButton>
                             </ListItem>
+                            <Collapse in={openF1} timeout="auto" unmountOnExit>
+                                <List component = "div" disablePadding>
+                                    <ListItemButton sx={{ pl: 4 }}>
+                                        <ListItem >
+                                            <ListItemText primary="British GP" />
+                                        </ListItem>
+                                    </ListItemButton>
+                                </List>
+                            </Collapse>   
                             <ListItem >
                                 <ListItemButton id='volleyball-btn'>
                                     <ListItemIcon>
