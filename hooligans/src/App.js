@@ -7,6 +7,7 @@ import { Home } from './pages/Home.tsx';
 import { Bets } from './pages/Bets.tsx';
 import { Schedule } from './pages/Schedule.tsx';
 import { Live } from './pages/Live.tsx';
+import OutlinedCard from './components/Card.tsx';
 
 function App() {
   return (
@@ -26,7 +27,9 @@ function App() {
             </Routes>
           </div>
         </Grid>
-        <Grid item sm={3}></Grid>
+        <Grid item sm={3}>
+          <OutlinedCard />
+        </Grid>
       </Grid>
             
     </div>
