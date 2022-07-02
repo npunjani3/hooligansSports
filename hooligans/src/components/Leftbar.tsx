@@ -5,6 +5,12 @@ import SportsBaseballIcon from '@mui/icons-material/SportsBaseball';
 import SportsScoreIcon from '@mui/icons-material/SportsScore';
 import SportsVolleyballIcon from '@mui/icons-material/SportsVolleyball';
 import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
+import { NavLink } from 'react-router-dom';
+
+let anchorStyle = {
+    textDecoration: "none",
+    color: "inherit",
+};
 
 export const Leftbar = () => {
     const [openSoccer, setSoccerOpen] = useState(false);
@@ -49,11 +55,13 @@ export const Leftbar = () => {
                             </ListItem>
                             <Collapse in={openSoccer} timeout="auto" unmountOnExit>
                                 <List component = "div" disablePadding>
-                                    <ListItemButton sx={{ pl: 4 }}>
-                                        <ListItem >
-                                            <ListItemText primary="UEFA Champions League" />
-                                        </ListItem>
-                                    </ListItemButton>
+                                    <NavLink to="/scheduleWidget" style={anchorStyle}>
+                                        <ListItemButton sx={{ pl: 4 }}>
+                                            <ListItem >
+                                                <ListItemText primary="UEFA Champions League" />
+                                            </ListItem>
+                                        </ListItemButton>
+                                    </NavLink>
                                 </List>
                             </Collapse>    
                             <ListItem >
