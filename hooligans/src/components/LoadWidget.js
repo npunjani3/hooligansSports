@@ -2,7 +2,7 @@ const LoadWidget = (callback) => {
     const existingScript = document.getElementById('apiFootball');
     
 
-    if(!existingScript) {
+    if(!existingScript && document.getElementById('holder')) {
         const parent = document.getElementById('holder');
         const script = document.createElement('script');
         script.src = "https://widgets.api-sports.io/2.0.3/widgets.js";
@@ -16,8 +16,6 @@ const LoadWidget = (callback) => {
                 callback();
             }
         };
-
-        return true;
     }
 
     if(existingScript && callback) callback();
