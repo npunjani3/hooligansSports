@@ -6,14 +6,6 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
 
 const card = (
   <React.Fragment>
@@ -37,7 +29,7 @@ const card = (
 
 export default function OutlinedCard() {
   return (
-    <Box sx={{ minWidth: 275, marginTop: 2, marginRight: 2 }}>
+    <Box sx={{ minWidth: 275, width: '400px', marginTop: 2, marginLeft: '40px' }}>
       <Card variant="outlined">{card}</Card>
     </Box>
   );

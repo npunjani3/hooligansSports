@@ -1,7 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import './api-football.css';
-import './widgets.css';
 import './sprite.svg';
 import './soccer_field.png';
 import { Grid } from '@mui/material';
@@ -12,7 +10,7 @@ import { Bets } from './pages/Bets.tsx';
 import { Schedule } from './pages/Schedule.tsx';
 import { Live } from './pages/Live.tsx';
 import OutlinedCard from './components/Card.tsx';
-import { ScheduleWidget } from './components/ScheduleWidget.tsx';
+import { Standings } from './components/Standings.tsx';
 
 
 function App() {
@@ -30,7 +28,7 @@ function App() {
               <Route path="/bets" element={<Bets />}></Route>
               <Route path="/live" element={<Live />}></Route>
               <Route path="/schedule" element={<Schedule />}></Route>
-              <Route path="/scheduleWidget" element={<ScheduleWidget />}></Route>
+              <Route path="/standings" element={<Standings />}></Route>
             </Routes>
           </div>
         </Grid>

@@ -55,10 +55,10 @@ export const Leftbar = () => {
                             </ListItem>
                             <Collapse in={openSoccer} timeout="auto" unmountOnExit>
                                 <List component = "div" disablePadding>
-                                    <NavLink to="/scheduleWidget" style={anchorStyle}>
+                                    <NavLink to="/standings" style={anchorStyle}>
                                         <ListItemButton sx={{ pl: 4 }}>
                                             <ListItem >
-                                                <ListItemText primary="UEFA Champions League" />
+                                                <ListItemText primary="MLS" />
                                             </ListItem>
                                         </ListItemButton>
                                     </NavLink>
