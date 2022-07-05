@@ -37,10 +37,10 @@ const teams = Data[0]
 
 
 for (let i = 0; i < 14; i++) {
-    rows.push(createData(teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["mp"], teams[i]["w"], teams[i]["d"], teams[i]["l"], teams[i]["gf"].toString()+':'+teams[i]["gl"].toString(), teams[i]["gl"], teams[i]["p"]));
+    rows.push(createData(teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["mp"], teams[i]["w"], teams[i]["d"], teams[i]["l"], teams[i]["gf"].toString()+':'+teams[i]["gl"].toString(), teams[i]["diff"], teams[i]["p"]));
 }
 for (let i = 14; i < 28; i++) {
-    rows.push(createData(teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["mp"], teams[i]["w"], teams[i]["d"], teams[i]["l"], teams[i]["gf"].toString()+':'+teams[i]["gl"].toString(), teams[i]["gl"], teams[i]["p"]));
+    rows.push(createData(teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["mp"], teams[i]["w"], teams[i]["d"], teams[i]["l"], teams[i]["gf"].toString()+':'+teams[i]["gl"].toString(), teams[i]["diff"], teams[i]["p"]));
 }
 
 export const SoccerStandings = () => {
