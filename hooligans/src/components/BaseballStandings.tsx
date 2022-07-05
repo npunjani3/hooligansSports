@@ -1,20 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
-import Data from '../assets/mlsStandings.json';
-
+import Data from '../assets/mlbStandings.json';
 
 interface StandingData {
     key: number;
     conf: string;
     standing: number;
     team: string;
-    mp: number;
+    gp: number;
     w: number;
-    d: number;
     l: number;
-    g: string;
-    a: number;
-    p: number;
+    pf: number;
+    pl: number;
 }
 
 function createData(
@@ -22,15 +19,13 @@ function createData(
     conf: string,
     standing: number,
     team: string,
-    mp: number,
+    gp: number, 
     w: number,
-    d: number,
     l: number,
-    g: string,
-    a: number,
-    p: number
+    pf: number,
+    pl: number
 ): StandingData { 
-    return {key, conf, standing, team, mp, w, d, l, g, a, p};
+    return {key, conf, standing, team, gp, w, l, pf, pl};
 }
 
 const rows: Array<StandingData> = [];
@@ -38,12 +33,12 @@ const rows2: Array<StandingData> = [];
 const teams = Data[0];
 
 
-for (let i = 0; i < 28; i++) {
-    if(i >13) rows2.push(createData(i,teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["mp"], teams[i]["w"], teams[i]["d"], teams[i]["l"], teams[i]["gf"].toString()+':'+teams[i]["gl"].toString(), teams[i]["diff"], teams[i]["p"]));
-    rows.push(createData(i,teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["mp"], teams[i]["w"], teams[i]["d"], teams[i]["l"], teams[i]["gf"].toString()+':'+teams[i]["gl"].toString(), teams[i]["diff"], teams[i]["p"]));
+for (let i = 0; i < 30; i++) {
+    if(i > 14) rows2.push(createData(i,teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["gp"], teams[i]["w"], teams[i]["l"], teams[i]["pf"], teams[i]["pl"]));
+    rows.push(createData(i,teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["gp"], teams[i]["w"], teams[i]["l"], teams[i]["pf"], teams[i]["pl"]));
 }
 
-export const SoccerStandings = () => {
+export const BaseballStandings = () => {
     const [standing, setStanding] = useState([]);
     /*
     useEffect(()=>{
@@ -69,47 +64,39 @@ export const SoccerStandings = () => {
 
     return (
         <TableContainer component={Paper} sx={{margin: '30px auto 0px auto', width: 1000, height: '90vh', overflow: 'scroll'}}>
-            <Typography variant="h5" component='div'>Soccer Standings</Typography>
+            <Typography variant="h5" component='div'>Baseball Standings</Typography>
             <Table sx={{minWidth: 700}}>
                 <TableHead>
                     <TableRow>
-                        <TableCell >{Data[0]["league"]["country"]+': '+Data[0]["league"]["league"]} Eastern Conference</TableCell>
-                        <TableCell align='right'>MP</TableCell>
+                        <TableCell >{Data[0]["league"]["country"]+': '+Data[0]["league"]["league"]}<Typography variant="h6">American League</Typography></TableCell>
+                        <TableCell align='right'>GP</TableCell>
                         <TableCell align='right'>W</TableCell>
-                        <TableCell align='right'>D</TableCell>
                         <TableCell align='right'>L</TableCell>
-                        <TableCell align='right'>G</TableCell>
-                        <TableCell align='right'>+/-</TableCell>
                         <TableCell align='right'>P</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
+                
                     {rows.map((row) => (
                         <TableRow key={row.key}>
                             <TableCell component="th" scope="row">
                                 {row.standing}. {row.team}
                             </TableCell>
-                            <TableCell align='right'>{row.mp}</TableCell>
+                            <TableCell align='right'>{row.gp}</TableCell>
                             <TableCell align='right'>{row.w}</TableCell>
-                            <TableCell align='right'>{row.d}</TableCell>
                             <TableCell align='right'>{row.l}</TableCell>
-                            <TableCell align='right'>{row.g}</TableCell>
-                            <TableCell align='right'>{row.a}</TableCell>
-                            <TableCell align='right'>{row.p}</TableCell>
+                            <TableCell align='right'>{row.pf+' : '+row.pl}</TableCell>
                         </TableRow>
                     ))}
                     <TableRow>
-                        <TableCell colSpan={9}>
+                        <TableCell colSpan={5}>
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell >{Data[0]["league"]["country"]+': '+Data[0]["league"]["league"]} Western Conference</TableCell>
-                                        <TableCell align='right'>MP</TableCell>
+                                        <TableCell >{Data[0]["league"]["country"]+': '+Data[0]["league"]["league"]} <Typography variant="h6">National League</Typography> </TableCell>
+                                        <TableCell align='right'>GP</TableCell>
                                         <TableCell align='right'>W</TableCell>
-                                        <TableCell align='right'>D</TableCell>
                                         <TableCell align='right'>L</TableCell>
-                                        <TableCell align='right'>G</TableCell>
-                                        <TableCell align='right'>+/-</TableCell>
                                         <TableCell align='right'>P</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -119,13 +106,10 @@ export const SoccerStandings = () => {
                                             <TableCell component="th" scope="row">
                                                 {row.standing}. {row.team}
                                             </TableCell>
-                                            <TableCell align='right'>{row.mp}</TableCell>
+                                            <TableCell align='right'>{row.gp}</TableCell>
                                             <TableCell align='right'>{row.w}</TableCell>
-                                            <TableCell align='right'>{row.d}</TableCell>
                                             <TableCell align='right'>{row.l}</TableCell>
-                                            <TableCell align='right'>{row.g}</TableCell>
-                                            <TableCell align='right'>{row.a}</TableCell>
-                                            <TableCell align='right'>{row.p}</TableCell>
+                                            <TableCell align='right'>{row.pf+' : '+row.pl}</TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>

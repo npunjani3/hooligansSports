@@ -11,6 +11,7 @@ import { Schedule } from './pages/Schedule.tsx';
 import { Live } from './pages/Live.tsx';
 import OutlinedCard from './components/Card.tsx';
 import { SoccerStandings } from './components/SoccerStandings.tsx';
+import { BaseballStandings } from './components/BaseballStandings.tsx';
 
 
 function App() {
@@ -28,7 +29,8 @@ function App() {
               <Route path="/bets" element={<Bets />}></Route>
               <Route path="/live" element={<Live />}></Route>
               <Route path="/schedule" element={<Schedule />}></Route>
-              <Route path="/standings" element={<SoccerStandings />}></Route>
+              <Route path="/soccer/standings" element={<SoccerStandings />}></Route>
+              <Route path="/baseball/standings" element={<BaseballStandings />}></Route>
             </Routes>
           </div>
         </Grid>
