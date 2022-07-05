@@ -73,7 +73,7 @@ export const SoccerStandings = () => {
             <Table sx={{minWidth: 700}}>
                 <TableHead>
                     <TableRow>
-                        <TableCell >{Data[0]["league"]["country"]+': '+Data[0]["league"]["league"]} Eastern Conference</TableCell>
+                        <TableCell >{Data[0]["league"]["country"]+': '+Data[0]["league"]["league"]} <Typography variant="h6"> Eastern Conference </Typography></TableCell>
                         <TableCell align='right'>MP</TableCell>
                         <TableCell align='right'>W</TableCell>
                         <TableCell align='right'>D</TableCell>
@@ -103,7 +103,7 @@ export const SoccerStandings = () => {
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell >{Data[0]["league"]["country"]+': '+Data[0]["league"]["league"]} Western Conference</TableCell>
+                                        <TableCell >{Data[0]["league"]["country"]+': '+Data[0]["league"]["league"]} <Typography variant="h6"> Western Conference </Typography></TableCell>
                                         <TableCell align='right'>MP</TableCell>
                                         <TableCell align='right'>W</TableCell>
                                         <TableCell align='right'>D</TableCell>

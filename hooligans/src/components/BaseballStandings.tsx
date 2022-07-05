@@ -42,7 +42,7 @@ export const BaseballStandings = () => {
     const [standing, setStanding] = useState([]);
     /*
     useEffect(()=>{
-        fetch("http://127.0.0.1:8000/apiFootball/soccer/standings/", {
+        fetch("http://127.0.0.1:8000/apiFootball/baseball/standings/", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -57,8 +57,8 @@ export const BaseballStandings = () => {
 
     /*
     for (let i = 0; i < 28; i++) {
-        if(i >13) rows2.push(createData(i,teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["mp"], teams[i]["w"], teams[i]["d"], teams[i]["l"], teams[i]["gf"]+':'+teams[i]["gl"], teams[i]["diff"], teams[i]["p"]));
-        rows.push(createData(i,teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["mp"], teams[i]["w"], teams[i]["d"], teams[i]["l"], teams[i]["gf"]+':'+teams[i]["gl"], teams[i]["diff"], teams[i]["p"]));
+        if(i >13) rows2.push(createData(i,teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["gp"], teams[i]["w"], teams[i]["l"], teams[i]["pf"], teams[i]["pl"]));
+        rows.push(createData(i,teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["gp"], teams[i]["w"], teams[i]["l"], teams[i]["pf"], teams[i]["pl"]));
     }
     */
 
