@@ -1,5 +1,7 @@
 import { AppBar, Toolbar, Typography, Stack, Button } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+
 
 let anchorStyle = {
     textDecoration: "none",
@@ -7,6 +9,12 @@ let anchorStyle = {
 };
 
 export const Navbar = () => {
+    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+    const { user } = useAuth0<{ name: string }>();
+    let button = <Button color='inherit' onClick={() => loginWithRedirect()}>Log in</Button>;
+    if (isAuthenticated) {
+        button = <Button color='inherit' onClick={() => logout()}>Log out</Button>;
+    }
     return (
         <AppBar position='static'>
             <Toolbar sx={{ justifyContent: 'space-between' }}>
@@ -26,7 +34,7 @@ export const Navbar = () => {
                     <NavLink to="/schedule" style={anchorStyle}>
                         <Button color='inherit'>Schedule</Button>
                     </NavLink>
-                    <Button color='inherit'>Log in</Button>
+                    {button}
                 </Stack>
             </Toolbar>
         </AppBar>
