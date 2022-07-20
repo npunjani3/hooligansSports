@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
-import Data from '../assets/mlbStandings.json';
+import axios from 'axios';
 
 interface StandingData {
     key: number;
@@ -28,47 +28,47 @@ function createData(
     return {key, conf, standing, team, gp, w, l, pf, pl};
 }
 
-const rows: Array<StandingData> = [];
-const rows2: Array<StandingData> = [];
-const teams = Data[0];
-
-
-for (let i = 0; i < 30; i++) {
-    if(i > 14) rows2.push(createData(i,teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["gp"], teams[i]["w"], teams[i]["l"], teams[i]["pf"], teams[i]["pl"]));
-    if(i < 14) rows.push(createData(i,teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["gp"], teams[i]["w"], teams[i]["l"], teams[i]["pf"], teams[i]["pl"]));
-}
-
 export const BaseballStandings = () => {
-    const [standing, setStanding] = useState([]);
-    /*
+    const[standing, setStanding] = useState([]);
+    const [error, setError] : [string, (error: string) => void] = useState("");
+     
     useEffect(()=>{
-        fetch("http://127.0.0.1:8000/apiFootball/baseball/standings/", {
-            method: 'GET',
+        axios.get("http://127.0.0.1:8000/apiFootball/baseball/standings/",{
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             }
-        })
-        .then(response => response.json())
-        .then(response => setStanding(response))
-        .catch( error => console.log(error))
+        }).then((resp) => {
+            setStanding(resp.data);
+        }).catch(error => {
+            setError(error);
+        });
     }, [])
-    //const rows: Array<StandingData> = [];
-    //const rows2: Array<StandingData> = [];
 
-    /*
-    for (let i = 0; i < 28; i++) {
-        if(i >13) rows2.push(createData(i,teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["gp"], teams[i]["w"], teams[i]["l"], teams[i]["pf"], teams[i]["pl"]));
-        rows.push(createData(i,teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["gp"], teams[i]["w"], teams[i]["l"], teams[i]["pf"], teams[i]["pl"]));
+    if(error) console.log(error);
+
+    const ld = standing['league'];
+    const teams = [];
+
+
+    const rows: Array<StandingData> = [];
+    const rows2: Array<StandingData> = [];
+
+    if(ld) {
+        console.log(standing.length);
+        for (let i = 0; i < 28; i++) {
+            teams.push(standing[i]);
+            if(i>13) rows2.push(createData(i,teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["gp"], teams[i]["w"], teams[i]["l"], teams[i]["pf"], teams[i]["pl"]));
+            if(i<13) rows.push(createData(i,teams[i]["group"],teams[i]["rank"], teams[i]["name"], teams[i]["gp"], teams[i]["w"], teams[i]["l"], teams[i]["pf"], teams[i]["pl"]));
+        }
     }
-    */
 
     return (
-        <TableContainer component={Paper} sx={{margin: '30px auto 0px auto', width: 1000, height: '90vh', overflow: 'scroll'}}>
+        <TableContainer component={Paper} sx={{margin: '30px auto 0px auto', width: '100%', height: '90vh', overflow: 'scroll'}}>
             <Typography variant="h5" component='div'>Baseball Standings</Typography>
             <Table sx={{minWidth: 700}}>
                 <TableHead>
                     <TableRow>
-                        <TableCell >{Data[0]["league"]["country"]+': '+Data[0]["league"]["league"]}<Typography variant="h6">American League</Typography></TableCell>
+                        <TableCell >{ ld && ld["country"]}{ld && ': '+ld["league"]}<Typography variant="h6">American League</Typography></TableCell>
                         <TableCell align='right'>GP</TableCell>
                         <TableCell align='right'>W</TableCell>
                         <TableCell align='right'>L</TableCell>
@@ -77,7 +77,7 @@ export const BaseballStandings = () => {
                 </TableHead>
                 <TableBody>
                 
-                    {rows.map((row) => (
+                    {rows && rows.map((row) => (
                         <TableRow key={row.key}>
                             <TableCell component="th" scope="row">
                                 {row.standing}. {row.team}
@@ -93,7 +93,7 @@ export const BaseballStandings = () => {
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell >{Data[0]["league"]["country"]+': '+Data[0]["league"]["league"]} <Typography variant="h6">National League</Typography> </TableCell>
+                                        <TableCell >{ ld && ld["country"]}{ld && ': '+ld["league"]} <Typography variant="h6">National League</Typography> </TableCell>
                                         <TableCell align='right'>GP</TableCell>
                                         <TableCell align='right'>W</TableCell>
                                         <TableCell align='right'>L</TableCell>
@@ -101,7 +101,7 @@ export const BaseballStandings = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {rows2.map((row) => (
+                                    {rows2 && rows2.map((row) => (
                                         <TableRow key={row.key}>
                                             <TableCell component="th" scope="row">
                                                 {row.standing}. {row.team}

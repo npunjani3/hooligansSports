@@ -10,9 +10,8 @@ import { Bets } from './pages/Bets.tsx';
 import { Schedule } from './pages/Schedule.tsx';
 import { Live } from './pages/Live.tsx';
 import OutlinedCard from './components/Card.tsx';
-import { SoccerStandings } from './components/SoccerStandings.tsx';
-import { BaseballStandings } from './components/BaseballStandings.tsx';
-import { SoccerContainer } from './containers/SoccerContainer.js';
+import { BaseballSubNav } from './components/BaseballSubNav.jsx';
+import { SoccerSubNav } from './components/SoccerSubNav.jsx';
 
 
 function App() {
@@ -30,8 +29,8 @@ function App() {
               <Route path="/bets" element={<Bets />}></Route>
               <Route path="/live" element={<Live />}></Route>
               <Route path="/schedule" element={<Schedule />}></Route>
-              <Route path="/soccer/standings" element={<SoccerContainer />}></Route>
-              <Route path="/baseball/standings" element={<BaseballStandings />}></Route>
+              <Route path="/soccer/mls" element={<SoccerSubNav />}></Route>
+              <Route path="/baseball/mlb" element={<BaseballSubNav />}></Route>
             </Routes>
           </div>
         </Grid>

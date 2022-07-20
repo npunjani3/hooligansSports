@@ -55,7 +55,7 @@ export const Leftbar = () => {
                             </ListItem>
                             <Collapse in={openSoccer} timeout="auto" unmountOnExit>
                                 <List component = "div" disablePadding>
-                                    <NavLink to="/soccer/standings" style={anchorStyle}>
+                                    <NavLink to="/soccer/mls" style={anchorStyle}>
                                         <ListItemButton sx={{ pl: 4 }}>
                                             <ListItem >
                                                 <ListItemText primary="MLS" />
@@ -74,7 +74,7 @@ export const Leftbar = () => {
                             </ListItem>
                             <Collapse in={openBaseball} timeout="auto" unmountOnExit>
                                 <List component = "div" disablePadding>
-                                    <NavLink to="/baseball/standings" style={anchorStyle}>
+                                    <NavLink to="/baseball/mlb" style={anchorStyle}>
                                         <ListItemButton sx={{ pl: 4 }}>
                                             <ListItem >
                                                 <ListItemText primary="MLB" />

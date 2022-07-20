@@ -30,7 +30,7 @@ const card = (
 export default function OutlinedCard() {
   return (
     <Box sx={{ minWidth: 275, width: '400px', marginTop: 2, marginLeft: '40px' }}>
-      <Card variant="outlined">{card}</Card>
+      <Card id='bet-card' variant="outlined">{card}</Card>
     </Box>
   );
 }
