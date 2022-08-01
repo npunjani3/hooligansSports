@@ -102,7 +102,7 @@ export const BaseballOdds = (props) => {
     return (
         <Box sx={{ width: '100%', height: '95vh', overflow: 'scroll' }}>
             <h1>Money Line</h1>
-            <Stack spacing={2}>
+            <Stack spacing={2} sx ={{width: '1000px', margin: '0 auto'}}>
                 {rows.map((row) => (
                     <Item key={row.key}>
                         <Box component="span" display="inline-flex" sx={{width: 'inherit', justifyContent: 'space-between'}}><Typography  textAlign='left'>{row.home} vs {row.away}</Typography> <Typography textAlign='right'>{row.date.toUTCString()}</Typography></Box>

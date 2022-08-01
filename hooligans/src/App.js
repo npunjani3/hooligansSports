@@ -1,7 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import './sprite.svg';
-import './soccer_field.png';
 import { Grid } from '@mui/material';
 import { Navbar } from './components/Navbar.tsx';
 import { Leftbar } from './components/Leftbar.tsx';

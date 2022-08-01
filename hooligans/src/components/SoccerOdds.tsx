@@ -102,7 +102,7 @@ export const SoccerOdds = (props) => {
     return (
         <Box sx={{ width: '100%', height: '95vh', overflow: 'scroll' }}>
             <h1>Money Line</h1>
-            <Stack spacing={2}>
+            <Stack spacing={2} sx ={{width: '1000px', margin: '0 auto'}}>
                 {rows.map((row) => (
                     <Item key = {row.key}>
                         <Typography textAlign='left' sx={{margin: '20px'}}>{row.home} vs {row.away}</Typography>
