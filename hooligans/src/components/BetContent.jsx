@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
 
 export default function BetContent(props) {
@@ -18,13 +18,6 @@ export default function BetContent(props) {
         if(odds > 0) return plusOdds(odds, amount);
         else return minusOdds(odds, amount);
     };
-
-    useEffect(()=>{
-        if (value > 0) {
-            const amount = parseInt(value, 10);
-            console.log(calcOdds(bet.odds, amount));
-        }
-    })
     
     return (
         <>
