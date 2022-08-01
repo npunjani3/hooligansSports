@@ -8,7 +8,8 @@ let anchorStyle = {
     color: "inherit",
 };
 
-export const BaseballSubNav = () => {
+export const BaseballSubNav = (props) => {
+    const { bets, onAdd } = props;
     const [selectedTab, setSelectedTab] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -22,8 +23,9 @@ export const BaseballSubNav = () => {
                     <Tab label="Standings" style={anchorStyle}></Tab>
                 </Tabs>
             </AppBar>
-            {selectedTab === 0 && <BaseballOdds />}
+            {selectedTab === 0 && <BaseballOdds bets={bets} onAdd={onAdd} />}
             {selectedTab === 1 && <BaseballStandings />}
+            
         </>
     )
 }

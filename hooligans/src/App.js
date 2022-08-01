@@ -12,9 +12,28 @@ import { Live } from './pages/Live.tsx';
 import OutlinedCard from './components/Card.tsx';
 import { BaseballSubNav } from './components/BaseballSubNav.jsx';
 import { SoccerSubNav } from './components/SoccerSubNav.jsx';
+import { useState } from 'react';
 
 
 function App() {
+  const [bets, setBets] = useState([]);
+  const onAdd = (bet) => {
+    const exists = bets.find((b) => {
+      if(b.key === bet.key) return true;
+      return false;
+    })
+    if(!exists) setBets([...bets, bet]);
+  };
+  const onRemove = (bet) => {
+    const exists = bets.find((b) => {
+      if(b.key === bet.key) return true;
+      return false;
+    })
+    if(exists) {
+      setBets(bets.filter((b) => b.key !== bet.key));
+    }
+  }
+
   return (
     <div className="App">
       <Navbar />
@@ -29,13 +48,13 @@ function App() {
               <Route path="/bets" element={<Bets />}></Route>
               <Route path="/live" element={<Live />}></Route>
               <Route path="/schedule" element={<Schedule />}></Route>
-              <Route path="/soccer/mls" element={<SoccerSubNav />}></Route>
-              <Route path="/baseball/mlb" element={<BaseballSubNav />}></Route>
+              <Route path="/soccer/mls" element={<SoccerSubNav bets={bets} onAdd={onAdd} />}></Route>
+              <Route path="/baseball/mlb" element={<BaseballSubNav bets={bets} onAdd={onAdd} />}></Route>
             </Routes>
           </div>
         </Grid>
         <Grid item sm={3}>
-          <OutlinedCard />
+          <OutlinedCard bets={bets} onAdd={onAdd} onRemove={onRemove} />
         </Grid>
       </Grid>
     </div>

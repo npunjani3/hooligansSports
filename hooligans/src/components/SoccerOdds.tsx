@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Odds from '../assets/mlsOdds.json';
 import axios from "axios";
 import { Box, Button, Paper, Stack, styled, Typography } from '@mui/material';
 
@@ -16,17 +15,42 @@ function createOutcomes(
 }
 
 interface OddsData {
+    key: string;
+    date: Date;
     home: string;
     away: string;
     outcome: Outcomes[];
 }
 
 function createOddsData (
+    key: string,
+    date: Date,
     home: string,
     away: string,
     outcome: Outcomes[],
 ): OddsData {
-    return {home, away, outcome};
+    return {key, date, home, away, outcome};
+}
+
+interface bet {
+    key: string,
+    pick: string,
+    event: string,
+    odds: number,
+    date: string,
+    user?: string
+}
+
+function createBet (
+    key: string,
+    pick: string,
+    event: string,
+    odds: number,
+    date: string,
+    user?: string
+  
+  ): bet {
+    return {key, pick, event, odds, date, user};
 }
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -37,25 +61,10 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
     width: '100%',
     height: '100%',
-  }));
-const data = Odds[0];
-const rows: Array<OddsData>=[];
+}));
 
-
-((Object.keys(data) as (keyof typeof data)[]).forEach((key) => {
-    const odds = data[key];
-    const home = odds['home_team'];
-    const away = odds['away_team'];
-    const out: Array<Outcomes>=[];
-    for(let i=0; i<3; i++){
-        out.push(createOutcomes(odds['outcome'][i]['name'], odds['outcome'][i]['price']));
-    }
-    rows.push(createOddsData(home, away, out));
-}))
-
-if(document.getElementById('bet-card')) console.log('found card');
-
-export const SoccerOdds = () => {
+export const SoccerOdds = (props) => {
+    const { onAdd } = props;
     const[odds, setOdds] = useState([]);
     const [error, setError] : [string, (error: string) => void] = useState("");
 
@@ -74,30 +83,33 @@ export const SoccerOdds = () => {
     if(error) console.log(error);
     const rows: Array<OddsData>=[];
     if(odds) {
-        console.log(odds);
         ((Object.keys(odds) as (keyof typeof odds)[]).forEach((key) => {
             const data = odds[key];
+            const k = data['id'];
+            const date = new Date(data['date']);
             const home = data['home_team'];
             const away = data['away_team'];
             const out: Array<Outcomes>=[];
             for(let i=0; i<3; i++){
                 out.push(createOutcomes(data['outcome'][i]['name'], data['outcome'][i]['price']));
             }
-            rows.push(createOddsData(home, away, out));
+            rows.push(createOddsData(k, date, home, away, out));
         }))
     }
+
+    var check = {} as bet; 
 
     return (
         <Box sx={{ width: '100%', height: '95vh', overflow: 'scroll' }}>
             <h1>Money Line</h1>
             <Stack spacing={2}>
                 {rows.map((row) => (
-                    <Item>
+                    <Item key = {row.key}>
                         <Typography textAlign='left' sx={{margin: '20px'}}>{row.home} vs {row.away}</Typography>
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 0, sm: 0, md: 0 }} sx={{justifyContent: 'space-around'}}>
-                            <Item>{row.home} <Button>{row.outcome[1].price}</Button></Item>
-                            <Item> Draw<Button>{row.outcome[2].price}</Button></Item>
-                            <Item>{row.away} <Button>{row.outcome[0].price}</Button></Item>
+                            <Item>{row.home} <Button onClick={() => {check = createBet(row.key, row.home, row.home+' @ '+row.away, row.outcome[1].price, new Date().toUTCString()); onAdd(check)}}>{(row.outcome[1].price > 0) && '+'+row.outcome[1].price}{(row.outcome[1].price < 0) && row.outcome[1].price}</Button></Item>
+                            <Item> Draw<Button onClick={() => {check = createBet(row.key, 'Draw', row.home+' @ '+row.away, row.outcome[2].price, new Date().toUTCString()); onAdd(check)}}>{(row.outcome[2].price > 0) && '+'+row.outcome[2].price}{(row.outcome[2].price < 0) && row.outcome[2].price}</Button></Item>
+                            <Item>{row.away} <Button onClick={() => {check = createBet(row.key, row.away, row.home+' @ '+row.away, row.outcome[0].price, new Date().toUTCString()); onAdd(check)}}>{(row.outcome[0].price > 0)&& '+'+row.outcome[0].price}{(row.outcome[0].price < 0) && row.outcome[0].price}</Button></Item>
                         </Stack>
                     </Item>
                 ))}
